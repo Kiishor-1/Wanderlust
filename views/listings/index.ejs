@@ -1,0 +1,146 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="filter_container">
+        <div id="filters">
+            <div class="filter">
+                <img src="/img/rooms.jpg" alt="" />
+                <p>Rooms</p>
+            </div>
+            <div class="filter">
+                <img src="/img/farms.jpg" alt="" />
+                <p>Farms</p>
+            </div>
+            <div class="filter">
+                <img src="/img/Arctic.jpg" alt="" />
+                <p>Arctic</p>
+            </div>
+            <div class="filter">
+                <img src="/img/amazing_views.jpg" alt="" />
+                <p>Amazing Views</p>
+            </div>
+            <div class="filter">
+                <img src="/img/amazing_pools.jpg" alt="" />
+                <p>Amazing Pools</p>
+            </div>
+            <div class="filter">
+                <img src="/img/beachfront.jpg" alt="" />
+                <p>Beachfront</p>
+            </div>
+            <div class="filter">
+                <img src="/img/tropical.jpg" alt="" />
+                <p>Tropicals</p>
+            </div>
+            <div class="filter">
+                <img src="/img/cabins.jpg" alt="" />
+                <p>Cabins</p>
+            </div>
+            <div class="filter">
+                <img src="/img/omg.jpg" alt="" />
+                <p>OMG!</p>
+            </div>
+            <div class="filter">
+                <img src="/img/lakefront.jpg" alt="" />
+                <p>Lakefront</p>
+            </div>
+            <div class="filter">
+                <img src="/img//tiny_homes.jpg" alt="" />
+                <p>Tiny Homes</p>
+            </div>
+            <div class="filter">
+                <img src="/img/castle.jpg" alt="" />
+                <p>Castles</p>
+            </div>
+            <div class="filter">
+                <img src="/img/countryside.jpg" alt="" />
+                <p>Countryside</p>
+            </div>
+            <div class="filter">
+                <img src="/img/treehouse.jpg" alt="" />
+                <p>Treehouse</p>
+            </div>
+            <div class="filter">
+                <img src="/img/grand_pianos.jpg" alt="" />
+                <p>Grand Pianos</p>
+            </div>
+            <div class="filter">
+                <img src="/img/camping.jpg" alt="" />
+                <p>Camping</p>
+            </div>
+            <div class="filter">
+                <img src="/img/islands.jpg" alt="" />
+                <p>Islands</p>
+            </div>
+            <div class="filter">
+                <img src="/img/national_parks.jpg" alt="" />
+                <p>National Parks</p>
+            </div>
+            <div class="filter">
+                <img src="/img/casas.jpg" alt="" />
+                <p>Casas</p>
+            </div>
+            <div class="filter">
+                <img src="/img/iconic_cities.jpg" alt="" />
+                <p>Iconic Cities</p>
+            </div>
+            <div class="filter">
+                <img src="/img/Arctic.jpg" alt="" />
+                <p>Arctic</p>
+            </div>
+            <div class="filter">
+                <img src="/img/beach.jpg" alt="" />
+                <p>Beach</p>
+            </div>
+            <div class="filter">
+                <img src="/img/lake.jpg" alt="" />
+                <p>Lake</p>
+            </div>
+        </div>
+        <div class="filter-btn fw-bold border m-2">
+            <i class="fa-solid fa-sliders me-1"></i>Filters
+        </div>
+        <div class="form-check-reverse form-switch tax_on_off border m-2">
+            <input class="form-check-input" type="checkbox" role="switch" id="tax_switch" onclick="tax_switch()">
+            <label class="form-check-label" for="tax_switch">Display Total Before Taxes</label>
+        </div>
+    </div>
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1">
+        <% for( let listing of allListings) { %>
+            <a href="/listings/<%= listing._id %>">
+                <div class="card col">
+                    <div class="img_container">
+                        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing[image]">
+                    </div>
+                    <!-- <div class="card-img-overlay"></div> -->
+                    <div class="card-body">
+                        <p class="card-text pt-1"><b>
+                                <%= listing.title %>
+                            </b></p>
+                        <p class="card-text">
+                            <span>&#8377; <%= listing.price.toLocaleString("en-IN") %>/ night </span>
+                            <span class="gst fw-bold">&nbsp;&nbsp;+18% GST</span>
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <% } %>
+    </div>
+
+    <script>
+        function tax_switch() {
+            let taxSwitch = document.getElementById('tax_switch');
+            let gst = document.querySelectorAll('.gst');
+            if (taxSwitch.checked == true) {
+                gst.forEach(el => {
+                    el.style.display = "inline";
+                    taxSwitch.style.backgroundColor = 'lightblue';
+                    taxSwitch.style.border = 'none';
+                });
+            } else {
+                gst.forEach(el => {
+                    el.style.display = "none";
+                    taxSwitch.style.backgroundColor = 'transparent';
+                    taxSwitch.style.border = '1px solid gray';
+                });
+            }
+        }
+    </script>

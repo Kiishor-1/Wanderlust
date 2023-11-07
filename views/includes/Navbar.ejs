@@ -1,0 +1,37 @@
+<div class="nav_container sticky-top" style="background-color: white;">
+    <div class="row">
+        <div class="col-md-12 pe-0">
+            <nav class="navbar nav navbar-expand-md  bg-body-light container-fluid">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+                    <button class="navbar-toggler toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <a class="nav-link" href="/listings">Explore</a>
+                        </div>
+                        <div class="search_container ms-auto border">
+                            <button class="search_field_btn border-end border-2">Anywhere</button>
+                            <button class="search_field_btn border-end border-2">Any Week</button>
+                            <form id="search_form" role="search">
+                              <input class="search_input form-control" type="search" placeholder="Search Destination" aria-label="Search">
+                              <button class="search_btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </form>
+                          </div>
+                        <div class="navbar-nav ms-auto">
+                            <a class="nav-link" href="/listings/new">Airbnb You Home</a>
+                            <% if (!currUser) { %>
+                                <a class="nav-link" href="/signup">SignUp</a>
+                                <a class="nav-link" href="/login">LogIn</a>
+                            <% } %>
+                            <% if (currUser) { %>
+                                <a class="nav-link" href="/logout">LogOut</a>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

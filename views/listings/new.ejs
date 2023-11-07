@@ -1,0 +1,53 @@
+<%- layout("/layouts/boilerplate") %>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h3 class="heading">Create A New Listing</h3>
+            <form action="/listings" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+                <div class="row margin_bottom">
+                    <div class="col-md-12">
+                        <label for="title" class="form-label margin_bottom">Title</label>
+                        <input type="text" class="form-control" name="listing[title]"
+                            placeholder="Set a catchy title here" required>
+                        <div class="valid-feedback">Looks Good!</div>
+                    </div>
+                </div>
+
+                <div class="row margin_bottom">
+                    <div class="col-md-12">
+                        <label for="Description" class="form-label margin_bottom">Description</label>
+                        <textarea type="text" class="form-control" name="listing[description]" required></textarea>
+                        <div class="invalid-feedback">Enter short and crisp description</div>
+                    </div>
+                </div>
+
+                <div class="row margin_bottom">
+                    <div class="col-md-12">
+                        <label for="image" class="form-label margin_bottom">Upload Image</label>
+                        <input type="file" class="form-control" name="listing[image]" required>
+                    </div>
+                </div>
+                <div class="row margin_bottom">
+                    <div class="col-md-12">
+                        <label for="price" class="form-label margin_bottom">Price</label>
+                        <input type="text" class="form-control" name="listing[price]" placeholder="Set Price" required>
+                        <div class="invalid-feedback">Required input field</div>
+                    </div>
+                </div>
+                <div class="row margin_bottom">
+                    <div class="col-md-4">
+                        <label for="location" class="form-label margin_bottom">Location</label>
+                        <input type="text" class="form-control" name="listing[location]" placeholder="Enter Location"
+                            required>
+                        <div class="invalid-feedback">Required input field</div>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="country" class="form-label margin_bottom ">Country</label>
+                        <input type="text" class="form-control" name="listing[country]" placeholder="Enter Country"
+                            required>
+                        <div class="invalid-feedback">Required input field</div>
+                    </div>
+                </div>
+                <button class="btn add_btn">Add</button>
+            </form>
+        </div>
+    </div>
