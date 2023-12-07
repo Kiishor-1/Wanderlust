@@ -97,7 +97,3 @@ let port = 8080;
 app.listen(port, (req, res) => {
     console.log(`Server running on port ${port}`);
 })
-//where is your project repo in git
-//wanderlust repo
-//pushed ni hai hai abhi
-//only commit hai toh i think show nii ho rha
