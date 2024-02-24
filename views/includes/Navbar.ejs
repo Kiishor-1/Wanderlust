@@ -14,8 +14,8 @@
                         <div class="search_container ms-auto border">
                             <button class="search_field_btn border-end border-2">Anywhere</button>
                             <button class="search_field_btn border-end border-2">Any Week</button>
-                            <form id="search_form" role="search">
-                              <input class="search_input form-control" type="search" placeholder="Search Destinations" aria-label="Search">
+                            <form id="search_form" role="search" action="/listings" method="get">
+                              <input class="search_input form-control" name="country" type="search" placeholder="Search Destinations" aria-label="Search">
                               <button class="search_btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </form>
                           </div>
