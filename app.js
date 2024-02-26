@@ -79,7 +79,9 @@ app.use((req, res, next)=>{
 const listingsRouter = require('./routes/listing.js');
 const reviewsRouter = require('./routes/reviews.js');
 const userRouter = require('./routes/user.js');
-
+app.get("/", (req, res)=>{
+    res.redirect("/listings");
+})
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", userRouter);
