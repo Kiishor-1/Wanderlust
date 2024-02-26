@@ -3,95 +3,95 @@
     <div class="filter_container">
         <div id="filters">
             <div class="filter">
-                <img src="/img/rooms.jpg" alt="" />
+                <a href="/listings"><img src="/img/rooms.jpg" alt="" /></a>
                 <p>Rooms</p>
             </div>
             <div class="filter">
-                <img src="/img/farms.jpg" alt="" />
+                <a href="/listings"><img src="/img/farms.jpg" alt="" /></a>
                 <p>Farms</p>
             </div>
             <div class="filter">
-                <img src="/img/Arctic.jpg" alt="" />
+                <a href="/listings"><img src="/img/Arctic.jpg" alt="" /></a>
                 <p>Arctic</p>
             </div>
             <div class="filter">
-                <img src="/img/amazing_views.jpg" alt="" />
+                <a href="/listings"><img src="/img/amazing_views.jpg" alt="" /></a>
                 <p>Amazing Views</p>
             </div>
             <div class="filter">
-                <img src="/img/amazing_pools.jpg" alt="" />
+                <a href="/listings"><img src="/img/amazing_pools.jpg" alt="" /></a>
                 <p>Amazing Pools</p>
             </div>
             <div class="filter">
-                <img src="/img/beachfront.jpg" alt="" />
+                <a href="/listings"><img src="/img/beachfront.jpg" alt="" /></a>
                 <p>Beachfront</p>
             </div>
             <div class="filter">
-                <img src="/img/tropical.jpg" alt="" />
+                <a href="/listings"><img src="/img/tropical.jpg" alt="" /></a>
                 <p>Tropicals</p>
             </div>
             <div class="filter">
-                <img src="/img/cabins.jpg" alt="" />
+                <a href="/listings"><img src="/img/cabins.jpg" alt="" /></a>
                 <p>Cabins</p>
             </div>
             <div class="filter">
-                <img src="/img/omg.jpg" alt="" />
+                <a href="/listings"><img src="/img/omg.jpg" alt="" /></a>
                 <p>OMG!</p>
             </div>
             <div class="filter">
-                <img src="/img/lakefront.jpg" alt="" />
+                <a href="/listings"><img src="/img/lakefront.jpg" alt="" /></a>
                 <p>Lakefront</p>
             </div>
             <div class="filter">
-                <img src="/img//tiny_homes.jpg" alt="" />
+                <a href="/listings"><img src="/img//tiny_homes.jpg" alt="" /></a>
                 <p>Tiny Homes</p>
             </div>
             <div class="filter">
-                <img src="/img/castle.jpg" alt="" />
+                <a href="/listings"><img src="/img/castle.jpg" alt="" /></a>
                 <p>Castles</p>
             </div>
             <div class="filter">
-                <img src="/img/countryside.jpg" alt="" />
+                <a href="/listings"><img src="/img/countryside.jpg" alt="" /></a>
                 <p>Countryside</p>
             </div>
             <div class="filter">
-                <img src="/img/treehouse.jpg" alt="" />
+                <a href="/listings"><img src="/img/treehouse.jpg" alt="" /></a>
                 <p>Treehouse</p>
             </div>
             <div class="filter">
-                <img src="/img/grand_pianos.jpg" alt="" />
+                <a href="/listings"><img src="/img/grand_pianos.jpg" alt="" /></a>
                 <p>Grand Pianos</p>
             </div>
             <div class="filter">
-                <img src="/img/camping.jpg" alt="" />
+                <a href="/listings"><img src="/img/camping.jpg" alt="" /></a>
                 <p>Camping</p>
             </div>
             <div class="filter">
-                <img src="/img/islands.jpg" alt="" />
+                <a href="/listings"><img src="/img/islands.jpg" alt="" /></a>
                 <p>Islands</p>
             </div>
             <div class="filter">
-                <img src="/img/national_parks.jpg" alt="" />
+                <a href="/listings"><img src="/img/national_parks.jpg" alt="" /></a>
                 <p>National Parks</p>
             </div>
             <div class="filter">
-                <img src="/img/casas.jpg" alt="" />
+                <a href="/listings"><img src="/img/casas.jpg" alt="" /></a>
                 <p>Casas</p>
             </div>
             <div class="filter">
-                <img src="/img/iconic_cities.jpg" alt="" />
+                <a href="/listings"><img src="/img/iconic_cities.jpg" alt="" /></a>
                 <p>Iconic Cities</p>
             </div>
             <div class="filter">
-                <img src="/img/Arctic.jpg" alt="" />
+                <a href="/listings"><img src="/img/Arctic.jpg" alt="" /></a>
                 <p>Arctic</p>
             </div>
             <div class="filter">
-                <img src="/img/beach.jpg" alt="" />
+                <a href="/listings"><img src="/img/beach.jpg" alt="" /></a>
                 <p>Beach</p>
             </div>
             <div class="filter">
-                <img src="/img/lake.jpg" alt="" />
+                <a href="/listings"><img src="/img/lake.jpg" alt="" /></a>
                 <p>Lake</p>
             </div>
         </div>
@@ -105,45 +105,45 @@
     </div>
     <% if (country) { %>
         <h3 class="search_result">Search results for: <span class="res_color"><%- country %></span> </h3>
-    <% } %>
-    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1">
-        <% for( let listing of allListings) { %>
-            <a href="/listings/<%= listing._id %>">
-                <div class="card col">
-                    <div class="img_container">
-                        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing[image]">
-                    </div>
-                    <!-- <div class="card-img-overlay"></div> -->
-                    <div class="card-body">
-                        <p class="card-text pt-1"><b>
-                                <%= listing.title %>
-                            </b></p>
-                        <p class="card-text">
-                            <span>&#8377; <%= listing.price.toLocaleString("en-IN") %>/ night </span>
-                            <span class="gst fw-bold">&nbsp;&nbsp;+18% GST</span>
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <% } %>
-    </div>
+        <% } %>
+            <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1">
+                <% for( let listing of allListings) { %>
+                    <a href="/listings/<%= listing._id %>">
+                        <div class="card col">
+                            <div class="img_container">
+                                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing[image]">
+                            </div>
+                            <!-- <div class="card-img-overlay"></div> -->
+                            <div class="card-body">
+                                <p class="card-text pt-1"><b>
+                                        <%= listing.title %>
+                                    </b></p>
+                                <p class="card-text">
+                                    <span>&#8377; <%= listing.price.toLocaleString("en-IN") %>/ night </span>
+                                    <span class="gst fw-bold">&nbsp;&nbsp;+18% GST</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <% } %>
+            </div>
 
-    <script>
-        function tax_switch() {
-            let taxSwitch = document.getElementById('tax_switch');
-            let gst = document.querySelectorAll('.gst');
-            if (taxSwitch.checked == true) {
-                gst.forEach(el => {
-                    el.style.display = "inline";
-                    taxSwitch.style.backgroundColor = 'lightblue';
-                    taxSwitch.style.border = 'none';
-                });
-            } else {
-                gst.forEach(el => {
-                    el.style.display = "none";
-                    taxSwitch.style.backgroundColor = 'transparent';
-                    taxSwitch.style.border = '1px solid gray';
-                });
-            }
-        }
-    </script>
+            <script>
+                function tax_switch() {
+                    let taxSwitch = document.getElementById('tax_switch');
+                    let gst = document.querySelectorAll('.gst');
+                    if (taxSwitch.checked == true) {
+                        gst.forEach(el => {
+                            el.style.display = "inline";
+                            taxSwitch.style.backgroundColor = 'lightblue';
+                            taxSwitch.style.border = 'none';
+                        });
+                    } else {
+                        gst.forEach(el => {
+                            el.style.display = "none";
+                            taxSwitch.style.backgroundColor = 'transparent';
+                            taxSwitch.style.border = '1px solid gray';
+                        });
+                    }
+                }
+            </script>
