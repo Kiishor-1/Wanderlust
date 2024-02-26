@@ -9,12 +9,12 @@ module.exports.index = async (req, res) => {
     const allListings = await Listing.find();
 
 
-    const { country } = req.query;
+    const { search } = req.query;
 
     // Split the search query by spaces
     let result;
-    if (country) {
-        const searchTerms =country.split(' ');
+    if (search) {
+        const searchTerms =search.split(' ');
 
         // Build a query object to find documents that match any of the search terms
         const regexTerms = searchTerms.map(term => new RegExp(term, 'i'));
@@ -35,7 +35,7 @@ module.exports.index = async (req, res) => {
     //     ? allListings.filter(listing => listing.country.toLowerCase() === country.toLowerCase())
     //     : allListings;
 
-    res.render('listings/index.ejs', { allListings: result?result :allListings, country });
+    res.render('listings/index.ejs', { allListings: result?result :allListings, search });
 }
 
 module.exports.renderNewForm = (req, res) => {
