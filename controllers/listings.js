@@ -8,14 +8,34 @@ module.exports.index = async (req, res) => {
 
     const allListings = await Listing.find();
 
+
     const { country } = req.query;
 
-    // Filter listings based on the country
-    const cityListings = country
-        ? allListings.filter(listing => listing.country.toLowerCase() === country.toLowerCase())
-        : allListings;
+    // Split the search query by spaces
+    let result;
+    if (country) {
+        const searchTerms =country.split(' ');
 
-    res.render('listings/index.ejs', { allListings:cityListings, country });
+        // Build a query object to find documents that match any of the search terms
+        const regexTerms = searchTerms.map(term => new RegExp(term, 'i'));
+        const query = {
+            $or: [
+                { country: { $in: regexTerms } },
+                { location: { $in: regexTerms } },
+            ],
+        };
+        // Use the query to find matching documents in the 'listings' collection
+        result = await Listing.find(query);
+    }
+
+    // const { country } = req.query;
+
+    // // Filter listings based on the country
+    // const cityListings = country
+    //     ? allListings.filter(listing => listing.country.toLowerCase() === country.toLowerCase())
+    //     : allListings;
+
+    res.render('listings/index.ejs', { allListings: result?result :allListings, country });
 }
 
 module.exports.renderNewForm = (req, res) => {
