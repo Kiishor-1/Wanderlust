@@ -103,7 +103,9 @@
             <label class="form-check-label" for="tax_switch">Display Total Before Taxes</label>
         </div>
     </div>
-    <h3 class="search_result">Search results for temp: <span class="res_color"><%- country %></span> </h3>
+    <% if (country) { %>
+        <h3 class="search_result">Search results for temp: <span class="res_color"><%- country %></span> </h3>
+    <% } %>
     <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1">
         <% for( let listing of allListings) { %>
             <a href="/listings/<%= listing._id %>">
