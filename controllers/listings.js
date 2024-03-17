@@ -14,7 +14,7 @@ module.exports.index = async (req, res) => {
     // Split the search query by spaces
     let result;
     if (search) {
-        const searchTerms =search.split(' ');
+        const searchTerms = search.split(' ');
 
         // Build a query object to find documents that match any of the search terms
         const regexTerms = searchTerms.map(term => new RegExp(term, 'i'));
@@ -35,7 +35,7 @@ module.exports.index = async (req, res) => {
     //     ? allListings.filter(listing => listing.country.toLowerCase() === country.toLowerCase())
     //     : allListings;
 
-    res.render('listings/index.ejs', { allListings: result?result :allListings, search });
+    res.render('listings/index.ejs', { allListings: result ? result : allListings, search });
 }
 
 module.exports.renderNewForm = (req, res) => {
@@ -93,7 +93,14 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
     let { id } = req.params;
-    let updatedListing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    let response = await geocodingClient.forwardGeocode({
+        query: req.body.listing.location,
+        limit: 1,
+    }).send();
+    let updatedListing = await Listing.findByIdAndUpdate(id, {
+        ...req.body.listing,
+        geometry: response.body.features[0].geometry,
+    });
     if (typeof req.file !== "undefined") {
         let url = req.file.path;
         let filename = req.file.filename;
