@@ -94,7 +94,6 @@
                     <div class="row card p-2 mb-1">
                       <div class="review-item border card-body shadow-sm p-3 pe-0 mb-3 bg-light rounded-1">
                         <div class="rate">
-                          <!--  <i class="fa-solid fa-star"></i> -->
                           <p class="starability-result" data-rating="<%= review.rating %>"></p>
                         </div>
                         <div class="comments">
@@ -106,10 +105,12 @@
                               <%= review.author.username %>
                             </i>
                           </div>
-                          <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
-                            method="POST">
-                            <button class="btn btn-dark btn-sm review_dlt">Delete</button>
-                          </form>
+                          <% if (currUser) { %>
+                            <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                              method="POST">
+                              <button class="btn btn-dark btn-sm review_dlt">Delete</button>
+                            </form>
+                          <% } %>
                         </div>
                       </div>
                     </div>
