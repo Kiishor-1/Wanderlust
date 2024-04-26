@@ -1,15 +1,27 @@
 <%- layout("/layouts/boilerplate") %>
-<div class="row">
-    <div class="col-md-12 error_container">
-        <div class="containerr">
-            <h4 class="err_header">Something Went Wrong</h4>
-            <h6 class="hostname">hostname :- https://<%= req.hostname %></h6>
-            <ul>
-                <li><%= err.message %></li>
-                <li><%= err.name %></li>
-                <li>status code : <%= statusCode %></li>
-            </ul>
-            <button id="reload" onclick="history.back();">Reload</button>
+    <div class="row">
+        <div class="col-md-12 error_container">
+            <div class="containerr">
+                <h4 class="err_header">Something Went Wrong</h4>
+                <h6 class="hostname">hostname :- https://<%= req.hostname %>
+                </h6>
+                <ul>
+                    <li>
+                        <%= err.message %>
+                    </li>
+                    <li>
+                        <%= err.name %>
+                    </li>
+                    <li>status code : <%= statusCode %>
+                    </li>
+                </ul>
+                <button id="reload" onclick="reloadPage();">Reload</button>
+            </div>
         </div>
     </div>
-</div>
+
+    <script>
+        function reloadPage() {
+            location.reload();
+        }
+    </script>
