@@ -24,8 +24,8 @@ mapboxgl.accessToken = mapToken;
 // Function to determine if it's nighttime in India (between 7 PM and 4 AM)
 function isNightTimeInIndia() {
     const now = new Date();
-    const hours = now.getUTCHours() + 5.5; // Adjust for Indian Standard Time (UTC+5:30)
-    return hours >= 19|| hours < 4;
+    const hours = (now.getUTCHours() + 5.5) % 24;  // Adjust for Indian Standard Time (UTC+5:30)
+    return hours >= 18 || hours < 4;
 }
 
 // Define the initial map style based on the current time
