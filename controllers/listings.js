@@ -6,10 +6,10 @@ const geocodingClient = mbxGeoconding({ accessToken: mapToken });
 
 module.exports.index = async (req, res) => {
 
-    const allListings = await Listing.find();
+    let allListings = await Listing.find();
 
 
-    const { search } = req.query;
+    const { search , category} = req.query;
 
     // Split the search query by spaces
     let result;
@@ -26,6 +26,13 @@ module.exports.index = async (req, res) => {
         };
         // Use the query to find matching documents in the 'listings' collection
         result = await Listing.find(query);
+        console.log(result)
+    }
+    if(category){
+        result = category ? allListings.filter((listing) => listing.category === category) : allListings;
+        // if(result.length < 1){
+        //     req.flash("error", "No Listings are available with such category");
+        // }
     }
 
     // const { country } = req.query;

@@ -378,6 +378,7 @@ footer a:hover {
     height: 3.3rem;
     width: 9rem !important;
     cursor: pointer;
+    color: black;
 }
 
 .filter:hover {
@@ -397,6 +398,9 @@ footer a:hover {
 
 @media screen and (max-width:450px) {
     #filters {
+        display: none;
+    }
+    h1.search_result{
         display: none;
     }
 }
