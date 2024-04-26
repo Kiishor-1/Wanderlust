@@ -1,6 +1,8 @@
 <% layout("/layouts/boilerplate") %>
 
     <div class="filter_container">
+        <button id="scrollRightBtn" class="scroll-btn"><i class="fa-solid fa-chevron-left"></i></button>
+        <!-- <button id="scrollLeftBtn" class="scroll-btn">◄</button> -->
         <div id="filters">
             <a href="/listings?category=Trending" class="filter">
                 <div><img src="/img/trending.jpg" alt="" /></div>
@@ -79,6 +81,8 @@
                 <p>Lake</p>
             </a>
         </div>
+        <button id="scrollLeftBtn" class="scroll-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        <!-- <button id="scrollRightBtn" class="scroll-btn">►</button> -->
         <div class="filter-btn fw-bold border m-2">
             <i class="fa-solid fa-sliders me-1"></i>Filters
         </div>
@@ -91,28 +95,28 @@
         <h3 class="search_result">Search results for: <span class="res_color"><%- search %></span> </h3>
         <% } %>
             <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1">
-                <% if (allListings.length === 0) { %>
-                 <h1 class="search_result">No Listings with this category</h1>
-                <% } %>
-                <% for( let listing of allListings) { %>
-                    <a href="/listings/<%= listing._id %>">
-                        <div class="card col">
-                            <div class="img_container">
-                                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing[image]">
-                            </div>
-                            <!-- <div class="card-img-overlay"></div> -->
-                            <div class="card-body">
-                                <p class="card-text pt-1"><b>
-                                        <%= listing.title %>
-                                    </b></p>
-                                <p class="card-text">
-                                    <span>&#8377; <%= listing.price.toLocaleString("en-IN") %>/ night </span>
-                                    <span class="gst fw-bold">&nbsp;&nbsp;+18% GST</span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
+                <% if (allListings.length===0) { %>
+                    <h1 class="search_result">No Listings with this category</h1>
                     <% } %>
+                        <% for( let listing of allListings) { %>
+                            <a href="/listings/<%= listing._id %>">
+                                <div class="card col">
+                                    <div class="img_container">
+                                        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing[image]">
+                                    </div>
+                                    <!-- <div class="card-img-overlay"></div> -->
+                                    <div class="card-body">
+                                        <p class="card-text pt-1"><b>
+                                                <%= listing.title %>
+                                            </b></p>
+                                        <p class="card-text">
+                                            <span>&#8377; <%= listing.price.toLocaleString("en-IN") %>/ night </span>
+                                            <span class="gst fw-bold">&nbsp;&nbsp;+18% GST</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                            <% } %>
             </div>
 
             <script>
@@ -133,4 +137,30 @@
                         });
                     }
                 }
+            </script>
+
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const scrollContainer = document.getElementById("filters");
+                    const scrollLeftBtn = document.getElementById("scrollLeftBtn");
+                    const scrollRightBtn = document.getElementById("scrollRightBtn");
+
+                    // Function to scroll left
+                    scrollLeftBtn.addEventListener("click", function () {
+                        scrollContainer.scrollBy({
+                            left: -100, // Adjust as needed
+                            behavior: "smooth"
+                        });
+                    });
+
+                    // Function to scroll right
+                    scrollRightBtn.addEventListener("click", function () {
+                        scrollContainer.scrollBy({
+                            left: 100, // Adjust as needed
+                            behavior: "smooth"
+                        });
+                    });
+                });
+
             </script>
