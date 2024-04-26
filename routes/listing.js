@@ -10,9 +10,19 @@ const multer = require('multer');
 const { storage, cloudinary } = require('../cloudConfig.js'); 
 const upload = multer({ storage: storage });
 
+const mid = (req, res, next)=>{
+    console.log(req.body.listing)
+    next();
+}
+
 Router.route("/")
     .get(wrapAsync(listingController.index))
-    .post(isLoggedIn, upload.single('listing[image]') ,listingValidation, wrapAsync(listingController.createListing));
+    .post(isLoggedIn,(req, res, next)=>{
+        console.log("printing")
+        console.log(req.body.listing)
+        next();
+    },        
+        upload.single('listing[image]') ,listingValidation, wrapAsync(listingController.createListing));
 
 
 //new /create form request
