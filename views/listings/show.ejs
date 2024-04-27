@@ -43,8 +43,8 @@
     <% } %>
 
 
-    <% if (currUser) { %>
-      <div class="row my-3">
+      <% if (currUser) { %>
+        <div class="row my-3">
           <div class="col-md-6 mx-auto">
             <hr>
             <h2>Leave a comment</h2>
@@ -77,85 +77,178 @@
               <button class="btn btn-outline-dark rounded-5 px-4 my-3">Submit</button>
             </form>
           </div>
-      </div>
-    <% } else{ %>
-      <div class="col-md-6 mx-auto mt-5 text-center mb-0">
-            <p class="mb-0 text-secondary">Please LogIn first to do comments on the posts</p>
-      </div>
-    <% } %>
+        </div>
+        <% } else{ %>
+          <div class="row">
+            <div class="col-md-6 mx-auto mt-5 text-center mb-0">
+              <p class="mb-0 text-secondary">Please LogIn first to do comments on the posts</p>
+            </div>
+          </div>
+          <% } %>
 
 
-    <div class="row my-4">
-              <div class="col-md-6 mx-auto">
+            <div class="row my-4">
+              <div class="col-md-8 mx-auto">
                 <hr>
-                <% if( listing.reviews.length> 0){ %>
+                <% if(listing.reviews.length> 0) { %>
                   <h2> All Reviews</h2>
-                  <% for( let review of listing.reviews ) { %>
-                    <div class="row card p-2 mb-1">
-                      <div class="review-item border card-body shadow-sm p-3 pe-0 mb-3 bg-light rounded-1">
-                        <div class="rate">
-                          <p class="starability-result" data-rating="<%= review.rating %>"></p>
-                        </div>
-                        <div class="comments">
-                          <%= review.comment %>
-                        </div>
-                        <div class="author-stuffs">
-                          <div class="author">
-                            <b>Author : </b><i>
+                  <div class="row row-cols-lg-2 row-cols-md-1">
+                    <% for(let review of listing.reviews) { %>
+                      <div class="p-1">
+                        <div class="review">
+                          <div class="d-flex">
+                            <div class="author">
                               <%= review.author.username %>
-                            </i>
+                            </div>
+                            <div class="review-date fw-semibold">
+                              <%= review.createdAt.toString().split(" ").slice(0, 4).join(" ") %></div>
+                    </div>
+                    <div class=" rating">&star;<span>
+                                  <%= review.rating %>
+                                </span>
+                            </div>
+                            <div class="comment">
+                              <!-- Show only first few characters initially -->
+                              <span class="few-comment">
+                                <%= review.comment.substring(0, 50) %>
+                              </span>
+                              <!-- Hide full comment initially -->
+                              <span class="comment-full" style="display: none;">
+                                <%= review.comment %>
+                              </span>
+                              <% if(review.comment.length> 50) { %>
+                                <!-- Add "See more" functionality -->
+                                <button class="see-more-btn">See more</button>
+                                <% } %>
+                            </div>
                           </div>
-                          <% if (currUser) { %>
-                            <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
-                              method="POST">
-                              <button class="btn btn-dark btn-sm review_dlt">Delete</button>
-                            </form>
-                          <% } %>
+                        </div>
+                        <% } %>
+                          <% } else { %>
+                            <div class="no_reviews p-2 bg-light">
+                              <h4>No Reviews Yet</h4>
+                            </div>
+                            <% } %>
+                      </div>
+                  </div>
+              </div>
+
+
+
+
+              <% if (listing.reviews.length > 0) { %>
+                <div class="row review_bar ">
+                  <div class="col-md-8 mx-auto">
+                    <div class="average-review-container row">
+                      <div class="rating-bars col-md-5">
+                        <div class="bar">
+                          <div class="bar-label">5 <i class="fa-solid fa-star"></i></div>
+                          <div class="bar-fill">
+                            <div class="fill-percentage" style="width: 0%; background-color: #FFC107;"></div>
+                          </div>
+                        </div>
+                        <div class="bar">
+                          <div class="bar-label">4 <i class="fa-solid fa-star"></i></div>
+                          <div class="bar-fill">
+                            <div class="fill-percentage" style="width: 0%; background-color: #FFC107;"></div>
+                          </div>
+                        </div>
+                        <div class="bar">
+                          <div class="bar-label">3 <i class="fa-solid fa-star"></i></div>
+                          <div class="bar-fill">
+                            <div class="fill-percentage" style="width: 0%; background-color: #FFC107;"></div>
+                          </div>
+                        </div>
+                        <div class="bar">
+                          <div class="bar-label">2 <i class="fa-solid fa-star"></i></div>
+                          <div class="bar-fill">
+                            <div class="fill-percentage" style="width:0%; background-color: #FFC107;"></div>
+                          </div>
+                        </div>
+                        <div class="bar">
+                          <div class="bar-label">1 <i class="fa-solid fa-star"></i></div>
+                          <div class="bar-fill">
+                            <div class="fill-percentage" style="width:0%; background-color: #FFC107;"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="average-rating col-md-5">
+                        <h5>Average Rating</h5>
+                        <div class="avg">
+                          Average: <span id="average-rating">0</span> <!-- Update dynamically -->
                         </div>
                       </div>
                     </div>
-                    <% } %>
-                      <% } else{ %>
-                        <div class="no_reviews p-2 bg-light">
-                          <h4>No Reviews Yet</h4>
-                        </div>
-                        <% } %>
+                  </div>
+                </div>
+              <% } %>
+
+
+
+
+
+              <div class="row">
+                <div class="col-md-8 my-3 mx-auto">
+                  <h3 class="mb-3">Where you'll be <i class="fa-solid fa-location-crosshairs ms-2"></i></h3>
+                  <div id="map"></div>
+                </div>
               </div>
-    </div>
 
 
-    <div class="col-md-8 my-3 mx-auto">
-        <h3 class="mb-3">Where you'll be <i class="fa-solid fa-location-crosshairs ms-2"></i></h3>
-        <div id="map"></div>
-    </div>
+              <!-- Modal -->
+              <div class="modal fade" id="Delete_Modal" tabindex="-1" aria-labelledby="Delete_ModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="Delete_ModalLabel">Delete Listing</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Are you Sure?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+                        <button class="positive btn btn-primary" onclick="show_alert()">Yes</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="Delete_Modal" tabindex="-1" aria-labelledby="Delete_ModalLabel"
-aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="Delete_ModalLabel">Delete Listing</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-      Are you Sure?
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
-        <button class="positive btn btn-primary" onclick="show_alert()">Yes</button>
-      </form>
-    </div>
-  </div>
-</div>
-</div>
+              <script>
+                const reviews = <%- JSON.stringify(listing.reviews) %>;
 
-<script>
-let btn = document.querySelector('.positive');
-btn.addEventListener("click", (e) => {
-  this.form.submit();
-})               
-</script>
-<script src="/js/map.js"></script>            
+                let sum = 0;
+                const size = 5;
+                const ratingCount = new Array(size).fill(0);
+
+                for (let i = 0; i < reviews.length; i++) {
+                  sum += reviews[i].rating;
+                  ratingCount[reviews[i].rating - 1]++;
+                }
+
+                let averageRating = (sum / reviews.length) || 0;
+                console.log(averageRating);
+
+                // Update the average rating in the HTML
+                document.getElementById('average-rating').textContent = averageRating.toFixed(1);
+
+                // Update the width of fill-percentage elements
+                const fillPercentageElements = document.querySelectorAll('.fill-percentage');
+                fillPercentageElements.forEach((item, index) => {
+                  const percentage = (ratingCount[fillPercentageElements.length - index - 1] / reviews.length) * 100;
+                  item.style.width = percentage + '%';
+                });
+              </script>
+
+              <script>
+                let btn = document.querySelector('.positive');
+                btn.addEventListener("click", (e) => {
+                  this.form.submit();
+                })               
+              </script>
+              <script src="/js/map.js"></script>
+              <script src="/js/seeMoreLess.js"></script>
