@@ -12,6 +12,7 @@ const listingSchema = new mongoose.Schema({
         filename: String,
     },
     price: Number,
+    priceAfterTax: Number,
     location: String,
     country: String,
     reviews: [

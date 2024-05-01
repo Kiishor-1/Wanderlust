@@ -360,7 +360,7 @@ footer a:hover {
 
 #tax_switch {
     width: 2rem;
-    height: 1.3rem;
+    height: 1rem;
     box-shadow: none;
 }
 
@@ -398,10 +398,13 @@ footer a:hover {
 
 @media screen and (max-width:450px) {
     #filters {
-        display: none;
+        /* display: none; */
     }
 
     h1.search_result {
+        display: none;
+    }
+    .filter-btn{
         display: none;
     }
 }
@@ -413,7 +416,7 @@ footer a:hover {
 
     .tax_on_off,
     .filter-btn {
-        font-size: 0.8rem;
+        font-size: 0.8rem !important;
         padding: 0.7rem 1rem;
     }
 
@@ -530,4 +533,41 @@ details>summary::-webkit-details-marker {
     color: rgb(33, 131, 173);
     border: none;
     background-color: white;
+}
+
+.priceAfterTax{
+    display: none;
+}
+.price-container{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.price-show-btn{
+    padding: 0.2rem 0.4rem;
+    margin: 0.3rem;
+    font-size:0.7rem;
+    background-color: rgb(14, 83, 161);
+    border: none;
+    color:white;
+    border-radius: 1rem;
+}
+.prices{
+    display: flex;
+    align-items: center;
+}
+
+.show-price-after-tax{
+    display: none;
+}
+
+.show input[type='checkbox']:checked ~.show-price{
+    display: none;
+}
+.show input[type='checkbox']:checked ~.show-price-after-tax{
+    display: block;
+}
+
+#showButton1{
+    display: none;
 }

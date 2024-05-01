@@ -18,7 +18,15 @@
         <b>
           <%= listing.description %>
         </b> <br>
-        &#8377; <%= listing.price.toLocaleString("en-IN") %>/night <br>
+        <div class="prices">
+          <p style="display: flex;" class="show">
+            <input type="checkbox"  name="" id="showButton1">
+            <span class="show-price fw-semibold">&#8377; <%= listing.price.toLocaleString("en-IN") %></span>
+            <span class="show-price-after-tax fw-semibold">&#8377; <%= listing.priceAfterTax.toLocaleString("en-IN") %></span>
+            /night
+          </p>
+          <label for="showButton1" class="price-show-btn mb-3">show after tax</label>
+        </div>
           <%= listing.location %> <br>
             <%= listing.country %> <br>
               <b>Owned By:</b>

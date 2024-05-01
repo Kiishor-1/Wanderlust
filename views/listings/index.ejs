@@ -87,8 +87,8 @@
             <i class="fa-solid fa-sliders me-1"></i>Filters
         </div>
         <div class="form-check-reverse form-switch tax_on_off border m-2">
-            <input class="form-check-input" type="checkbox" role="switch" id="tax_switch" onclick="tax_switch()">
-            <label class="form-check-label" for="tax_switch">Display Total Before Taxes</label>
+            <input class="form-check-input fs-6" type="checkbox" role="switch" id="tax_switch" onclick="tax_switch()">
+            <label class="form-check-label tax_switch_label" for="tax_switch">Display Total Before Taxes</label>
         </div>
     </div>
     <% if (search) { %>
@@ -110,35 +110,17 @@
                                                 <%= listing.title %>
                                             </b></p>
                                         <p class="card-text">
-                                            <span>&#8377; <%= listing.price.toLocaleString("en-IN") %>/ night </span>
-                                            <span class="gst fw-bold">&nbsp;&nbsp;+18% GST</span>
+                                            <p class="price-container">
+                                                <span class="price fw-semibold">&#8377; <%= listing.price.toLocaleString("en-IN") %></span>
+                                                <span class="priceAfterTax fw-semibold">&#8377; <%= listing.priceAfterTax.toLocaleString("en-IN") %></span>
+                                                / night 
+                                            </p>
                                         </p>
                                     </div>
                                 </div>
                             </a>
                             <% } %>
             </div>
-
-            <script>
-                function tax_switch() {
-                    let taxSwitch = document.getElementById('tax_switch');
-                    let gst = document.querySelectorAll('.gst');
-                    if (taxSwitch.checked == true) {
-                        gst.forEach(el => {
-                            el.style.display = "inline";
-                            taxSwitch.style.backgroundColor = 'lightblue';
-                            taxSwitch.style.border = 'none';
-                        });
-                    } else {
-                        gst.forEach(el => {
-                            el.style.display = "none";
-                            taxSwitch.style.backgroundColor = 'transparent';
-                            taxSwitch.style.border = '1px solid gray';
-                        });
-                    }
-                }
-            </script>
-
 
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
@@ -164,3 +146,4 @@
                 });
 
             </script>
+            <script src="/js/priceAfterTax.js"></script>
