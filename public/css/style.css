@@ -1,7 +1,7 @@
 body {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
-    min-height: 100vh;
-    min-width: 400px;
+    /* min-height: 100vh; */
+    /* min-width: 400px; */
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
@@ -16,6 +16,7 @@ a {
 
 .main_container {
     flex: 1;
+    min-height: 65vh;
 }
 
 .nav_container {
@@ -555,6 +556,7 @@ details>summary::-webkit-details-marker {
 .prices{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .show-price-after-tax{
