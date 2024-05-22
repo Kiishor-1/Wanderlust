@@ -97,7 +97,7 @@
         <% } %>
             <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1">
                 <% if (allListings.length===0) { %>
-                    <h1 class="search_result">No Listings with this category</h1>
+                    <h1 class="search_result fs-5">No Listings with this category or search item</h1>
                     <% } %>
                         <% for( let listing of allListings) { %>
                             <a href="/listings/<%= listing._id %>">
