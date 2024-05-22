@@ -50,23 +50,15 @@ const geocodingClient = mbxGeoconding({ accessToken: mapToken });
 // }
 
 module.exports.index = async (req, res) => {
-
     let allListings = await Listing.find();
 
-    const { search, minPrice, maxPrice } = req.query;
-    let { category } = req.query;
-
-    // Ensure category is always an array
-    if (!Array.isArray(category)) {
-        category = [category];
-    }
+    const { search, minPrice, maxPrice, category } = req.query;
 
     let result = allListings;
 
     // If search parameter is provided, filter by country or location
     if (search) {
         const searchTerms = search.split(' ');
-
         const regexTerms = searchTerms.map(term => new RegExp(term, 'i'));
         const searchQuery = {
             $or: [
@@ -79,7 +71,7 @@ module.exports.index = async (req, res) => {
     }
 
     // If category parameter is provided, filter by category
-    if (category) {
+    if (category && category.length > 0) {
         result = result.filter(listing => category.includes(listing.category));
     }
 
@@ -93,6 +85,7 @@ module.exports.index = async (req, res) => {
 
     res.render('listings/index.ejs', { allListings: result, search });
 }
+
 
 
 module.exports.renderNewForm = (req, res) => {
