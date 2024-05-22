@@ -398,14 +398,15 @@ footer a:hover {
 
 @media screen and (max-width:450px) {
     #filters {
-        /* display: none; */
+        display: none;
     }
 
     h1.search_result {
         display: none;
     }
-    .filter-btn{
-        display: none;
+
+    .filter-btn {
+        /* display: none; */
     }
 }
 
@@ -498,7 +499,7 @@ footer a:hover {
     gap: 1rem;
 }
 
-.review .comment{
+.review .comment {
     font-size: 0.9rem;
 }
 
@@ -528,47 +529,92 @@ details>summary::-webkit-details-marker {
     display: none;
 }
 
-.see-more-btn{
+.see-more-btn {
     font-size: 0.85rem;
     color: rgb(33, 131, 173);
     border: none;
     background-color: white;
 }
 
-.priceAfterTax{
+.priceAfterTax {
     display: none;
 }
-.price-container{
+
+.price-container {
     display: flex;
     align-items: center;
     gap: 3px;
 }
-.price-show-btn{
+
+.price-show-btn {
     padding: 0.2rem 0.4rem;
     margin: 0.3rem;
-    font-size:0.7rem;
+    font-size: 0.7rem;
     background-color: rgb(14, 83, 161);
     border: none;
-    color:white;
+    color: white;
     border-radius: 1rem;
 }
-.prices{
+
+.prices {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.show-price-after-tax{
+.show-price-after-tax {
     display: none;
 }
 
-.show input[type='checkbox']:checked ~.show-price{
+.show input[type='checkbox']:checked~.show-price {
     display: none;
 }
-.show input[type='checkbox']:checked ~.show-price-after-tax{
+
+.show input[type='checkbox']:checked~.show-price-after-tax {
     display: block;
 }
 
-#showButton1{
+#showButton1 {
     display: none;
+}
+
+
+.filter-image {
+    position: relative;
+}
+
+.filter-image input {
+    position: absolute;
+    bottom: 2rem;
+    left: 6px;
+    z-index: 3;
+    border: none !important;
+    outline: none !important;
+    display: none;
+}
+
+.filter-image img {
+    width: 1.5rem;
+}
+
+.filter-image p {
+    font-size: 0.8rem;
+}
+
+.price-range {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.price-range input {
+    width: 10rem;
+}
+
+@media screen and (max-width:500px) {
+    .price-range {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
 }
