@@ -4,46 +4,96 @@ const mbxGeoconding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeoconding({ accessToken: mapToken });
 
+// module.exports.index = async (req, res) => {
+
+//     let allListings = await Listing.find();
+
+//     const { search , category, minPrice, maxPrice} = req.query;
+//     console.log(req.query)
+
+//     // Split the search query by spaces
+//     let result;
+//     if (search) {
+//         const searchTerms = search.split(' ');
+
+//         // Build a query object to find documents that match any of the search terms
+//         const regexTerms = searchTerms.map(term => new RegExp(term, 'i'));
+//         const query = {
+//             $or: [
+//                 { country: { $in: regexTerms } },
+//                 { location: { $in: regexTerms } },
+//             ],
+//         };
+//         // Use the query to find matching documents in the 'listings' collection
+//         result = await Listing.find(query);
+//         console.log(result)
+//     }
+//     if(category){
+//         result = category ? allListings.filter((listing) => listing.category === category) : allListings;
+//     }
+
+//     if (minPrice || maxPrice) {
+//         const min = minPrice ? parseInt(minPrice) : Number.MIN_SAFE_INTEGER;
+//         const max = maxPrice ? parseInt(maxPrice) : Number.MAX_SAFE_INTEGER;
+
+//         result = result.filter(listing => listing.price >= min && listing.price <= max);
+//     }
+
+//     // const { country } = req.query;
+
+//     // // Filter listings based on the country
+//     // const cityListings = country
+//     //     ? allListings.filter(listing => listing.country.toLowerCase() === country.toLowerCase())
+//     //     : allListings;
+
+//     res.render('listings/index.ejs', { allListings: result ? result : allListings, search });
+// }
+
 module.exports.index = async (req, res) => {
 
     let allListings = await Listing.find();
 
+    const { search, minPrice, maxPrice } = req.query;
+    let { category } = req.query;
 
-    const { search , category} = req.query;
+    // Ensure category is always an array
+    if (!Array.isArray(category)) {
+        category = [category];
+    }
 
-    // Split the search query by spaces
-    let result;
+    let result = allListings;
+
+    // If search parameter is provided, filter by country or location
     if (search) {
         const searchTerms = search.split(' ');
 
-        // Build a query object to find documents that match any of the search terms
         const regexTerms = searchTerms.map(term => new RegExp(term, 'i'));
-        const query = {
+        const searchQuery = {
             $or: [
                 { country: { $in: regexTerms } },
                 { location: { $in: regexTerms } },
             ],
         };
-        // Use the query to find matching documents in the 'listings' collection
-        result = await Listing.find(query);
-        console.log(result)
-    }
-    if(category){
-        result = category ? allListings.filter((listing) => listing.category === category) : allListings;
-        // if(result.length < 1){
-        //     req.flash("error", "No Listings are available with such category");
-        // }
+
+        result = await Listing.find(searchQuery);
     }
 
-    // const { country } = req.query;
+    // If category parameter is provided, filter by category
+    if (category) {
+        result = result.filter(listing => category.includes(listing.category));
+    }
 
-    // // Filter listings based on the country
-    // const cityListings = country
-    //     ? allListings.filter(listing => listing.country.toLowerCase() === country.toLowerCase())
-    //     : allListings;
+    // If minPrice or maxPrice parameters are provided, filter by price range
+    if (minPrice || maxPrice) {
+        const min = minPrice ? parseInt(minPrice) : Number.MIN_SAFE_INTEGER;
+        const max = maxPrice ? parseInt(maxPrice) : Number.MAX_SAFE_INTEGER;
 
-    res.render('listings/index.ejs', { allListings: result ? result : allListings, search });
+        result = result.filter(listing => listing.price >= min && listing.price <= max);
+    }
+
+    res.render('listings/index.ejs', { allListings: result, search });
 }
+
 
 module.exports.renderNewForm = (req, res) => {
     res.render("listings/new.ejs");

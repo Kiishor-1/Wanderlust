@@ -1,0 +1,192 @@
+<style>
+    .filter-image {
+        position: relative;
+    }
+
+    .filter-image input {
+        position: absolute;
+        bottom: 2rem;
+        left: 6px;
+        z-index: 3;
+        border: none !important;
+        outline: none !important;
+        display: none;
+    }
+
+    .filter-image img {
+        width: 1.5rem;
+    }
+
+    .filter-image p {
+        font-size: 0.8rem;
+    }
+</style>
+
+<!-- Modal -->
+<div style="min-height: 500px !important;" class="modal modal-lg fade" id="staticBackdrop" data-bs-backdrop="static"
+    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form id="selectionForm" method="get" action="/listings" class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Filters</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 1rem 3rem;">
+                <div class="m-2">
+                    <h5>Price Rage</h5>
+                    <p style="font-size: 0.9rem;">Total prices for 5 nights before taxes</p>
+                    <div class="price-range p-3"
+                        style="display: flex;justify-content: space-around;align-items: center;">
+                        <input class="form-control" style="width: 10rem;" value="1000" type="number" min="1000" name="minPrice" id="minPrice">
+                        <span class="text-secondary">To</span>
+                        <input class="form-control" style="width: 10rem;" value="2200000" type="number" max="2200000"
+                        name="maxPrice" id="maxPrice">
+                    </div>
+                </div>
+                <div class="m-2">
+                    <h5>Types of place</h5>
+                    <p style="font-size: 0.9rem;">Search rooms, entire homes or any type of place</p>
+                    <div class="category-of-place p-2">
+                        <div class="row row-cols-lg-6 row-cols-md-4 row-cols-sm-2">
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/trending.jpg" alt="" /></div>
+                                <p>Trending</p>
+                                <input type="checkbox" class="m-0 opt" name="category" value="Trending">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/rooms.jpg" alt="" /></div>
+                                <p>Rooms</p>
+                                <input class="m-0 opt" value="Rooms" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/farms.jpg" alt="" /></div>
+                                <p>Farms</p>
+                                <input class="m-0 opt" value="Farms" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/amazing_views.jpg" alt="" /></div>
+                                <p>Views</p>
+                                <input class="m-0 opt" value="Views" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/amazing_pools.jpg" alt="" /></div>
+                                <p>Pools</p>
+                                <input class="m-0 opt" value="Pools" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/beachfront.jpg" alt="" /></div>
+                                <p>Beachfront</p>
+                                <input class="m-0 opt" value="Beachfront" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/tropical.jpg" alt="" /></div>
+                                <p>Tropicals</p>
+                                <input class="m-0 opt" value="Tropicals" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/cabins.jpg" alt="" /></div>
+                                <p>Cabins</p>
+                                <input class="m-0 opt" value="Cabins" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/lakefront.jpg" alt="" /></div>
+                                <p>Lakefront</p>
+                                <input class="m-0 opt" value="Lakefront" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/castle.jpg" alt="" /></div>
+                                <p>Castles</p>
+                                <input class="m-0 opt" value="Castles" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/countryside.jpg" alt="" /></div>
+                                <p>Countryside</p>
+                                <input class="m-0 opt" value="Countryside" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/treehouse.jpg" alt="" /></div>
+                                <p>Treehouse</p>
+                                <input class="m-0 opt" value="Treehouse" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/grand_pianos.jpg" alt="" /></div>
+                                <p>Pianos</p>
+                                <input class="m-0 opt" value="Pianos" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/camping.jpg" alt="" /></div>
+                                <p>Camping</p>
+                                <input class="m-0 opt" value="Camping" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/islands.jpg" alt="" /></div>
+                                <p>Islands</p>
+                                <input class="m-0 opt" value="Islands" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/casas.jpg" alt="" /></div>
+                                <p>Casas</p>
+                                <input class="m-0 opt" value="Casas" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/Arctic.jpg" alt="" /></div>
+                                <p>Arctic</p>
+                                <input class="m-0 opt" value="Arctic" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/beach.jpg" alt="" /></div>
+                                <p>Beach</p>
+                                <input class="m-0 opt" value="Beach" type="checkbox">
+                            </label>
+                            <label class="filter-image col text-dark">
+                                <div><img src="/img/lake.jpg" alt="" /></div>
+                                <p>Lake</p>
+                                <input class="m-0 opt" value="Lake" type="checkbox">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-outline-primary">Apply</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let opt = document.querySelectorAll('.opt');
+    opt.forEach((ele) => {
+        ele.addEventListener("change", function () {
+            if (this.checked == true)
+                this.style.display = "block"
+            else
+                this.style.display = "none"
+        })
+    })
+</script>
+
+
+<script>
+    // JavaScript to handle the form submission
+    document.getElementById('selectionForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const selectedCheckboxes = form.querySelectorAll('input[type="checkbox"]:checked');
+        const selectedValues = Array.from(selectedCheckboxes).map(checkbox => checkbox.value);
+
+        // Create a query string with the selected categories
+        const params = new URLSearchParams();
+        selectedValues.forEach(value => params.append('category', value));
+
+        // Get the price range values
+        const minPrice = form.querySelector('#minPrice').value;
+        const maxPrice = form.querySelector('#maxPrice').value;
+        if (minPrice !== '') params.append('minPrice', minPrice);
+        if (maxPrice !== '') params.append('maxPrice', maxPrice);
+
+        // Redirect to the /listings route with the selected values as query parameters
+        window.location.href = `/listings?${params.toString()}`;
+    });
+</script>
