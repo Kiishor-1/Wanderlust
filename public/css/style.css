@@ -618,3 +618,15 @@ details>summary::-webkit-details-marker {
         gap: 0.5rem;
     }
 }
+
+
+body::-webkit-scrollbar {
+    display: none !important;
+}
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+.modal-body::-webkit-scrollbar {
+    display: none !important;
+}
