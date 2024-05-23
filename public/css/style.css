@@ -633,3 +633,12 @@ body::-webkit-scrollbar {
 .modal-body::-webkit-scrollbar {
     display: none !important;
 }
+
+/* Hide the scrollbar for mobile devices */
+@media (max-width: 768px) {
+    body.modal-open {
+        overflow: hidden !important;
+        position: fixed;
+        width: 100%;
+    }
+}
