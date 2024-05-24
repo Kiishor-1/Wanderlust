@@ -59,3 +59,12 @@ module.exports.reviewValidation = (req, res, next) => {
         next();
     }
 };
+
+module.exports.canCheckout = (req, res, next)=>{
+    const user = req.user;
+    if(user.bookings.length <= 0){
+        req.flash("error","We have a lot more for you");
+        return res.redirect('/listings');
+    }
+    next(); 
+}

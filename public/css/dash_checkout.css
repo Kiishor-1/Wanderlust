@@ -1,0 +1,19 @@
+.dash_img {
+    width: 400px !important;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.booking-item {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.checkout_btn_form{
+    float: inline-end;
+}
+
+.payment_process{
+    display: flex;gap: 0.5rem;align-items: center;
+}

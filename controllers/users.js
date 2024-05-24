@@ -1,4 +1,5 @@
 const User = require('../Models/User');
+const Booking = require('../Models/Booking')
 
 module.exports.renderSignUpForm = (req, res) => {
     res.render("users/signup.ejs");
@@ -41,4 +42,33 @@ module.exports.logout = (req, res, next) => {
         req.flash("success", "You are logged Out");
         res.redirect("/listings");
     });
+}
+
+module.exports.dashboard = async(req, res)=>{
+    try {
+        const userId = req.user._id;
+        const bookings = await Booking.find({ user: userId }).populate('listing').exec();
+        console.log(bookings);
+        res.render('users/dashboard', { bookings });
+    } catch (error) {
+        console.error("Error fetching bookings:", error);
+        res.redirect('/listings');
+    }
+}
+
+module.exports.checkout = async (req, res) => {
+    const userId = req.user._id;
+    const user = await User.findById(userId).populate({
+        path: "bookings",
+        populate: {
+            path: "listing",
+        }
+    });
+    const bookings = user.bookings;
+    let price = 0;
+    bookings.forEach(element => {
+        price += element.listing.price;
+    });
+    console.log(price)
+    res.render('users/checkout', { price });
 }

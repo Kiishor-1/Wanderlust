@@ -14,6 +14,8 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./Models/User.js');
+const Listing = require('./Models/listing.js')
+const puppeteer = require('puppeteer');
 
 // const dbUrl = 'mongodb://127.0.0.1:27017/wanderlust';
 const dbUrl = process.env.ATLAS_SERVER_URL;
@@ -79,11 +81,51 @@ app.use((req, res, next)=>{
 const listingsRouter = require('./routes/listing.js');
 const reviewsRouter = require('./routes/reviews.js');
 const userRouter = require('./routes/user.js');
+const bookListings = require('./routes/bookings.js')
 app.get("/", (req, res)=>{
     res.redirect("/listings");
 })
+
+// app.get('/download-receipt/:id', async (req, res) => {
+//     const {id} = req.params;
+//     let listing = await Listing.findById(id);
+//     const booking = {
+//         id: listing._id,
+//         guestName: 'John Doe',
+//         hotelName: listing.title,
+//         checkInDate: '2023-05-01',
+//         checkOutDate: '2023-05-07',
+//         amount: listing.price
+//     };
+
+//     const html = await ejs.renderFile(path.join(__dirname, 'views', 'listings/receipt.ejs'), { booking });
+
+//     try {
+//         const browser = await puppeteer.launch({
+//             headless: true,  // Set to false for debugging
+//             timeout: 60000,   // Increase timeout
+//             executablePath: 'C:/Users/nisha/.cache/puppeteer/chrome/win64-125.0.6422.60/chrome-win64/chrome.exe',  // Set the path to Chromium
+//             args: ['--no-sandbox', '--disable-setuid-sandbox']  // Additional arguments
+//         });
+
+//         const page = await browser.newPage();
+//         await page.setContent(html, { waitUntil: 'networkidle0' });
+
+//         const pdfBuffer = await page.pdf({ format: 'A4' });
+//         await browser.close();
+
+//         res.setHeader('Content-Type', 'application/pdf');
+//         res.setHeader('Content-Disposition', 'attachment; filename=receipt.pdf');
+//         res.send(pdfBuffer);
+//     } catch (error) {
+//         console.error('Error generating PDF:', error);
+//         res.status(500).send('Error generating PDF');
+//     }
+// });
+
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
+app.use("/listings",bookListings);
 app.use("/", userRouter);
 
 app.all("*", (req, res, next) => {

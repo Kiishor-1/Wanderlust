@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .receipt { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; }
+        .receipt h1 { text-align: center; }
+        .details { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="receipt">
+        <h1>Hotel Booking Receipt</h1>
+        <p>Booking ID: <%= booking.id %></p>
+        <p>Guest Name: <%= booking.guestName %></p>
+        <p>Hotel: <%= booking.hotelName %></p>
+        <p>Check-in: <%= booking.checkInDate %></p>
+        <p>Check-out: <%= booking.checkOutDate %></p>
+        <p>Amount Paid: $<%= booking.amount %></p>
+    </div>
+</body>
+</html>

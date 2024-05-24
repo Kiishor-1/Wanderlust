@@ -27,13 +27,40 @@
           </p>
           <label for="showButton1" class="price-show-btn mb-3">show after tax</label>
         </div>
-          <%= listing.location %> <br>
-            <%= listing.country %> <br>
-              <b>Owned By:</b>
-              <%= listing.owner.username %>
+        <div class="show_data">
+          <div class="">
+            <%= listing.location %> <br>
+              <%= listing.country %> <br>
+                <b>Owned By:</b>
+                <%= listing.owner.username %>
+                <!-- <form action="/download-receipt/<%= listing._id %>">
+                  <button class="btn btn-outline-light text-dark">Download receipt</button>
+              </form> -->
+          </div>
+          <% if (currUser) { %>
+            <div class="">
+                <% if (isBooked) { %>
+                    <form action="/listings/<%= listing._id %>/book?_method=DELETE" method="POST">
+                        <button class="btn btn-outline-success">Reserved</button>
+                    </form>
+                <% } else { %>
+                    <form action="/listings/<%= listing._id %>/book" method="POST">
+                        <button class="btn btn-outline-primary">Reserve</button>
+                    </form>
+                <% } %>
+            </div>
+        <% } %>
+        </div>
       </p>
     </div>
   </div>
+
+
+
+ 
+
+
+
   <% if (currUser && currUser._id.equals(listing.owner._id)) { %>
     <div class="row">
       <div class="col-md-6 mx-auto">

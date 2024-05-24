@@ -1,0 +1,13 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="container mt-5">
+        <h1>Checkout</h1>
+        <p>Thank you for your bookings! Please proceed with payment to confirm your reservations.</p>
+        <div class="payment_process">
+            <form action="/process-payment" method="POST">
+                <button class="btn btn-success">Proceed to Payment</button>
+            </form>
+            <p style="margin: 1rem;" id="totalPrice">Total payable amount is : <%= price %>
+            </p>
+        </div>
+    </div>

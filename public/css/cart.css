@@ -1,0 +1,22 @@
+.cart-btn {
+    width: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.cart-btn .circle {
+    color: white;
+    position: absolute;
+    top: -0.1rem;
+    right: 0.1rem;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background-color: teal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+}

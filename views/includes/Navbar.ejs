@@ -7,7 +7,6 @@
                         <img class="wander-logo1" src="/img/wander1.png" alt="logo">
                         <img class="wander-logo2" src="/img/wander.png" alt="logo">
                     </a>
-                    <!-- <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a> -->
                     <button class="navbar-toggler toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -30,7 +29,13 @@
                                 <a class="nav-link" href="/login">LogIn</a>
                             <% } %>
                             <% if (currUser) { %>
-                                <a class="nav-link" href="/logout">LogOut</a>
+                                <a class="nav-link" href="/logout">Logout</a>
+                                <div class="cart-btn">
+                                    <a class="nav-link"  href="/dashboard"><i class="fa-solid fa-hotel" style="color: #FE424D;"></i></a>
+                                    <div class="circle">
+                                      <%= currUser.bookings.length %>
+                                    </div>
+                                  </div>
                             <% } %>
                         </div>
                     </div>
