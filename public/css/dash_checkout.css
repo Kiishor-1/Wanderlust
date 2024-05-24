@@ -1,6 +1,6 @@
 .dash_img {
-    width: 400px !important;
-    height: 250px;
+    width: 350px !important;
+    /* height: 250px; */
     object-fit: cover;
     object-position: center;
 }
@@ -10,10 +10,27 @@
     flex-wrap: wrap;
 }
 
-.checkout_btn_form{
+.checkout_btn_form {
     float: inline-end;
 }
 
-.payment_process{
-    display: flex;gap: 0.5rem;align-items: center;
+.payment_process {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+@media screen and (max-width:500px) {
+    .my_bookings {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .booking-item a img {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
 }
