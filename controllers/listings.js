@@ -105,18 +105,27 @@ module.exports.showListing = async (req, res) => {
         .populate("owner")
 
     if (!listing) {
-        req.flash("error", "Linsting you requesting for is not available");
-        res.redirect("/listings");
+        req.flash("error", "Listing you are requesting for is not available");
+        return res.redirect("/listings");
     }
 
     let isBooked = false;
+    let isPaid = false;
+    let isUnbooked = true;
+
     if (req.user) {
         const userBookings = await Booking.find({ user: req.user._id, listing: req.params.id });
         isBooked = userBookings.length > 0;
+
+        if (isBooked) {
+            isPaid = userBookings.some(booking => booking.status === "Paid");
+            isUnbooked = !isPaid;
+        }
     }
 
-    res.render("listings/show.ejs", { listing,isBooked });
+    res.render("listings/show.ejs", { listing, isBooked, isPaid, isUnbooked });
 }
+
 
 module.exports.createListing = async (req, res, next) => {
     let response = await geocodingClient.forwardGeocode({

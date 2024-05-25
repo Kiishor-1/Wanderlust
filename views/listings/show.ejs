@@ -37,19 +37,20 @@
                   <button class="btn btn-outline-light text-dark">Download receipt</button>
               </form> -->
           </div>
-          <% if (currUser) { %>
-            <div class="">
-                <% if (isBooked) { %>
-                    <form action="/listings/<%= listing._id %>/book?_method=DELETE" method="POST">
-                        <button class="btn btn-outline-success">Reserved</button>
-                    </form>
-                <% } else { %>
-                    <form action="/listings/<%= listing._id %>/book" method="POST">
-                        <button class="btn btn-outline-primary">Reserve</button>
-                    </form>
-                <% } %>
-            </div>
-        <% } %>
+          <% console.log("Listing ID:", listing._id.toString()); %>
+          <% if (isBooked) { %>
+              <% if (isPaid) { %>
+                  <a href="/dashboard" class="btn btn-outline-info">Go to Dashboard</a>
+              <% } else { %>
+                  <form action="/listings/<%= listing._id %>/book?_method=DELETE" method="POST">
+                      <button class="btn btn-outline-success">Reserved</button>
+                  </form>
+              <% } %>
+          <% } else { %>
+              <form action="/listings/<%= listing._id %>/book" method="POST">
+                  <button class="btn btn-outline-primary">Reserve</button>
+              </form>
+          <% } %>
         </div>
       </p>
     </div>
