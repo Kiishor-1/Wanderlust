@@ -75,7 +75,21 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next)=>{
     res.locals.alertMsg = req.flash("success");
     res.locals.errortMsg = req.flash("error");
-    res.locals.currUser = req.user;
+    // res.locals.currUser = req.user;
+    next();
+});
+
+app.use(async (req, res, next) => {
+    if (req.isAuthenticated()) {
+        try {
+            res.locals.currUser = await User.findById(req.user._id).populate('bookings').exec();
+        } catch (err) {
+            console.error("Error populating bookings:", err);
+            res.locals.currUser = req.user;
+        }
+    } else {
+        res.locals.currUser = null;
+    }
     next();
 });
 
