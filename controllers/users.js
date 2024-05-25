@@ -44,31 +44,30 @@ module.exports.logout = (req, res, next) => {
     });
 }
 
-module.exports.dashboard = async(req, res)=>{
+module.exports.dashboard = async (req, res) => {
     try {
         const userId = req.user._id;
-        const bookings = await Booking.find({ user: userId }).populate('listing').exec();
-        console.log(bookings);
+        const bookings = await Booking.find({ user: userId, status: 'Booked' }).populate('listing').exec();
+        // console.log(bookings);
         res.render('users/dashboard', { bookings });
     } catch (error) {
         console.error("Error fetching bookings:", error);
         res.redirect('/listings');
     }
-}
+};
+
 
 module.exports.checkout = async (req, res) => {
-    const userId = req.user._id;
-    const user = await User.findById(userId).populate({
-        path: "bookings",
-        populate: {
-            path: "listing",
-        }
-    });
-    const bookings = user.bookings;
-    let price = 0;
-    bookings.forEach(element => {
-        price += element.listing.price;
-    });
-    console.log(price)
-    res.render('users/checkout', { price });
+    try {
+        const userId = req.user._id;
+        const bookings = await Booking.find({ user: userId, status:'Booked' }).populate('listing').exec();
+
+        // Calculate total price
+        const price = bookings.reduce((total, booking) => total + booking.listing.price, 0);
+
+        res.render('users/checkout', { bookings, price });
+    } catch (error) {
+        console.error("Error fetching bookings:", error);
+        res.redirect('users/dashboard');
+    }
 }

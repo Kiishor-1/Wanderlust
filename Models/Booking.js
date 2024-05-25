@@ -12,6 +12,12 @@ const bookingSchema = new Schema({
         ref: 'Listing',
         required: true
     },
+    status:{
+        type:String,
+        enum:["Unbooked","Booked","Paid"],
+        default:"Unbooked",
+        required:true
+    },
     createdAt: {
         type: Date,
         default: Date.now

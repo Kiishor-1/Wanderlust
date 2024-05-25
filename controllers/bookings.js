@@ -2,7 +2,7 @@ const Booking = require('../Models/Booking');
 const User = require('../Models/User');
 
 module.exports.initBooking = async (req,res)=>{
-    console.log(req.params.id)
+    // console.log(req.params.id)
     try {
         const listingId = req.params.id;
         const userId = req.user._id;
@@ -14,7 +14,7 @@ module.exports.initBooking = async (req,res)=>{
         }
 
         // Create a new booking
-        const booking = new Booking({ user: userId, listing: listingId });
+        const booking = new Booking({ user: userId, listing: listingId,status:"Booked" });
         await booking.save();
 
         // Add booking ID to user's bookings
@@ -55,3 +55,4 @@ module.exports.deleteBooking = async (req, res)=>{
         res.redirect(`/listings/${req.params.id}`);
     }
 }
+

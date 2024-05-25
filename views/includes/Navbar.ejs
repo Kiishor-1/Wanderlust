@@ -32,8 +32,13 @@
                                 <a class="nav-link" href="/logout">Logout</a>
                                 <div class="cart-btn">
                                     <a class="nav-link"  href="/dashboard"><i class="fa-solid fa-hotel" style="color: #FE424D;"></i></a>
+                                    <% 
+                                    // Filter the bookings array to include only those with status "Paid"
+                                    const paidBookings = currUser.bookings.filter(booking => booking.status === "Paid");
+                                    %>
+
                                     <div class="circle">
-                                      <%= currUser.bookings.length %>
+                                        <%= paidBookings.length %>
                                     </div>
                                   </div>
                             <% } %>

@@ -1,13 +1,84 @@
 <% layout("/layouts/boilerplate") %>
 
-    <div class="container mt-5">
-        <h1>Checkout</h1>
-        <p>Thank you for your bookings! Please proceed with payment to confirm your reservations.</p>
-        <div class="payment_process">
-            <form action="/process-payment" method="POST">
-                <button class="btn btn-success">Proceed to Payment</button>
-            </form>
-            <p style="margin: 1rem;" id="totalPrice">Total payable amount is : <%= price %>
-            </p>
-        </div>
+<div class="container mt-5">
+    <h1>Checkout</h1>
+    <p>Thank you for your bookings! Please proceed with payment to confirm your reservations.</p>
+    <div class="payment_process">
+        <form id="payment-form">
+            <button class="btn btn-success" id="rzp-button1">Proceed to Payment</button>
+        </form>
+        <p style="margin: 1rem;" id="totalPrice">Total payable amount is: <%= price %></p>
     </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    const totalPrice = <%= price %> ;
+    document.getElementById('rzp-button1').onclick = async function(e) {
+        // console.log("clicked")
+        // console.log("total price is ", totalPrice)
+        e.preventDefault();
+
+        // Create an order on the server
+        const response = await fetch('/payment/create-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ amount: totalPrice}), // Amount in rupees
+            data:totalPrice
+        });
+
+        const data = await response.json();
+
+        if (!data.id) {
+            console.error("Error creating order:", data);
+            return;
+        }
+
+        // Initialize Razorpay
+        const options = {
+            key: '<%= process.env.RAZORPAY_KEY_ID %>', // Public key
+            amount: data.amount,
+            currency: data.currency,
+            name: "Wanderlust",
+            description: "Test Transaction",
+            order_id: data.id,
+            handler: function (response) {
+                // After successful payment
+                fetch('/payment/verify-payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature,
+                        bookings: <%- JSON.stringify(bookings) %> // Pass bookings object
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = "/dashboard";
+                    } else {
+                        alert("Payment verification failed. Please try again.");
+                    }
+                })
+                .catch(error => console.error("Error verifying payment:", error));
+            },
+            prefill: {
+                name: "<%= currUser.username %>",
+                email: "<%= currUser.email %>",
+                
+            },
+            theme: {
+                color: "#3399cc"
+            }
+        };
+
+        const rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+</script>
