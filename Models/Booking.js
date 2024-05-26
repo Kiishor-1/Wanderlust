@@ -21,6 +21,9 @@ const bookingSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    paidAt: {
+        type: Date
     }
 });
 

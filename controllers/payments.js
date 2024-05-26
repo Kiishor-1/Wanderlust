@@ -48,7 +48,7 @@ module.exports.verifyPayment = async (req, res) => {
             // Update your database with the booking details
             await Booking.updateMany(
                 { _id: { $in: bookings } }, // Find all bookings with IDs in the `bookings` array
-                { $set: { status: 'Paid' } } // Update the status of each booking to "Paid"
+                { $set: { status: 'Paid',paidAt: new Date() } } // Update the status of each booking to "Paid"
             );
 
             res.json({ success: true });

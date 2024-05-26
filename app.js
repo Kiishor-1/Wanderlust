@@ -16,6 +16,7 @@ const LocalStrategy = require('passport-local');
 const User = require('./Models/User.js');
 const Listing = require('./Models/listing.js')
 const puppeteer = require('puppeteer');
+const Booking = require('./Models/Booking.js')
 
 // const dbUrl = 'mongodb://127.0.0.1:27017/wanderlust';
 const dbUrl = process.env.ATLAS_SERVER_URL;
@@ -29,6 +30,8 @@ main().then(res => {
 async function main() {
     await mongoose.connect(dbUrl);
 }
+
+Booking.collection.createIndex({ "paidAt": 1 }, { expireAfterSeconds: 3 * 24 * 60 * 60 });
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));

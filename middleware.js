@@ -1,3 +1,4 @@
+const Booking = require('./Models/Booking.js');
 const Listing = require('./Models/listing');
 const Review = require('./Models/Review');
 const { listingSchema ,reviewSchema} = require('./schema.js');
@@ -60,10 +61,12 @@ module.exports.reviewValidation = (req, res, next) => {
     }
 };
 
-module.exports.canCheckout = (req, res, next)=>{
+module.exports.canCheckout = async (req, res, next)=>{
     const user = req.user;
-    if(user.bookings.length <= 0){
-        req.flash("error","We have a lot more for you");
+    const paidBookings = await Booking.find({user:user._id, status:"Paid"});
+    console.log(user.bookings.length - paidBookings.length <= 0)
+    if(user.bookings.length - paidBookings.length <= 0){
+        req.flash("error", "We have a lot more for you");
         return res.redirect('/listings');
     }
     next(); 

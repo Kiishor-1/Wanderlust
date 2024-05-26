@@ -30,7 +30,7 @@
     <% } %>
 </div>
 
-<% if (bookings.length > 0) { %>
+<% if (bookings.length - paidBookings.length > 0) { %>
    <div class="">
     <form class="m-2 checkout_btn_form" action="/checkout" method="GET">
         <button class="btn btn-outline-primary">Checkout</button>
