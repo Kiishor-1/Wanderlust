@@ -35,9 +35,11 @@
                                     <% 
                                     const allBookings = currUser.bookings.filter(booking => booking.status == "Booked");
                                     %>
-                                    <div class="circle">
-                                        <%= allBookings.length %>
-                                    </div>
+                                    <% if (allBookings.length) { %>
+                                        <div class="circle">
+                                            <%= allBookings.length %>
+                                        </div>
+                                    <% } %>
                                   </div>
                             <% } %>
                         </div>
