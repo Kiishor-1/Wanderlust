@@ -8,7 +8,7 @@ const wrapAsync = require('../Utils/wrapAsync');
 
 
 Router.route("/:id/book")
-    .post(isLoggedIn,wrapAsync(BookingController.initBooking))
+    .post(isLoggedIn,wrapAsync(BookingController.initBooking2))
     .delete(isLoggedIn, wrapAsync(BookingController.deleteBooking));
 
 module.exports = Router;

@@ -13,7 +13,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"><%= booking.listing.title %></h5>
                                 <p class="card-text">Location: <%= booking.listing.location %></p>
-                                <p class="card-text">Price: <%= booking.listing.price %></p>
+                                <p class="card-text">Final Price: <%= booking.totalRent %></p>
                                 <p class="card-text">Country: <%= booking.listing.country %></p>
                                 <p class="card-text">Booked on: <b><%= booking.createdAt.toDateString() %></b> </p>
                                 <form action="/listings/<%= booking.listing._id %>/book?_method=DELETE" method="POST">
@@ -55,11 +55,14 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= paidBooking.listing.title %></h5>
                             <p class="card-text">Location: <%= paidBooking.listing.location %></p>
-                            <p class="card-text">Price: <%= paidBooking.listing.price %></p>
+                            <p class="card-text">Price: <%= paidBooking.totalRent %></p>
                             <p class="card-text">Country: <%= paidBooking.listing.country %></p>
                             <p class="card-text">Booked on: <b><%= paidBooking.createdAt.toDateString() %></b> </p>
-                            <!-- <form action="/listings/<%= paidBooking.listing._id %>/book?_method=DELETE" method="POST">
+                            <!-- <form action="/listings/%= paidBooking.listing._id %>/book?_method=DELETE" method="POST">
                                 <button class="btn btn-outline-danger">Cancel Booking</button>
+                            </form> -->
+                            <!-- <form action="/download-receipt/%= listing._id %>">
+                                    <button class="btn btn-outline-light text-dark">Download receipt</button>
                             </form> -->
                         </div>
                     </div>

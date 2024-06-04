@@ -1,0 +1,117 @@
+.containeer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.total {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.total span {
+    display: block;
+    font-size: 14px;
+    color: gray;
+}
+
+.date-selection {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+}
+
+.date label {
+    font-size: 12px;
+    color: gray;
+    margin-bottom: 5px;
+}
+
+.date input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.guests-dropdown {
+    position: relative;
+}
+
+#guests-button {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: left;
+    background-color: white;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 20px;
+}
+
+.guest-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.controls button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #eee;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls .count {
+    margin: 0 10px;
+}
+
+.note {
+    font-size: 12px;
+    color: gray;
+    margin-top: 10px;
+}
+
+.propertyCard {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: space-between;
+}
+
+.propertyCard .propertyInfo {
+    display: flex;
+    flex-direction: column;
+}

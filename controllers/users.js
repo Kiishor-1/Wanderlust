@@ -66,7 +66,7 @@ module.exports.checkout = async (req, res) => {
         const bookings = await Booking.find({ user: userId, status:'Booked' }).populate('listing').exec();
 
         // Calculate total price
-        const price = bookings.reduce((total, booking) => total + booking.listing.price, 0);
+        const price = bookings.reduce((total, booking) => total + booking.totalRent, 0);
 
         res.render('users/checkout', { bookings, price });
     } catch (error) {

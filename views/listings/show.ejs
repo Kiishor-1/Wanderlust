@@ -4,8 +4,9 @@
     const listing = <%- JSON.stringify(listing) %>;
   </script>
 
+
   <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-10 mx-auto">
       <h3 class="mt-4">
         <%= listing.title %>
       </h3>
@@ -13,7 +14,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-10 mx-auto">
       <p>
         <b>
           <%= listing.description %>
@@ -25,32 +26,111 @@
             <span class="show-price-after-tax fw-semibold">&#8377; <%= listing.priceAfterTax.toLocaleString("en-IN") %></span>
             /night
           </p>
-          <label for="showButton1" class="price-show-btn mb-3">show after tax</label>
+          <!-- <label for="showButton1" class="price-show-btn mb-3">show after tax</label> -->
         </div>
-        <div class="show_data">
-          <div class="">
-            <%= listing.location %> <br>
-              <%= listing.country %> <br>
-                <b>Owned By:</b>
-                <%= listing.owner.username %>
-                <!-- <form action="/download-receipt/<%= listing._id %>">
-                  <button class="btn btn-outline-light text-dark">Download receipt</button>
-              </form> -->
+        <div class="propertyCard">
+          <div class="propertyInfo">
+            <p><%= listing.location %></p>
+              <p><%= listing.country %></p>
+                <p><b>Owned By:</b>
+                  <%= listing.owner.username %></p>
           </div>
-          <% console.log("Listing ID:", listing._id.toString()); %>
+          <!-- <div class="" > -->
+           
           <% if (isBooked) { %>
-              <% if (isPaid) { %>
-                  <a href="/dashboard" class="btn btn-outline-info">Go to Dashboard</a>
-              <% } else { %>
-                  <form action="/listings/<%= listing._id %>/book?_method=DELETE" method="POST">
-                      <button class="btn btn-outline-success">Reserved</button>
-                  </form>
-              <% } %>
-          <% } else { %>
-              <form action="/listings/<%= listing._id %>/book" method="POST">
-                  <button class="btn btn-outline-primary">Reserve</button>
-              </form>
-          <% } %>
+            <% if (isPaid) { %>
+                <div class="my-2">
+                    <a href="/dashboard" class="btn btn-outline-info w-100">Go to Dashboard</a>
+                </div>
+            <% } else { %>
+                <form class="my-2" action="/listings/<%= listing._id %>/book?_method=DELETE" method="POST">
+                    <button class="btn btn-outline-success w-100">Reserved</button>
+                </form>
+            <% } %>
+        <% } else { %>
+            <!-- <form class="my-2" action="/listings/<%= listing._id %>/book" method="POST">
+                <label for="checkIn">Check-in:</label>
+                <input type="date" id="checkIn" name="checkIn" required>
+                
+                <label for="checkOut">Check-out:</label>
+                <input type="date" id="checkOut" name="checkOut" required>
+        
+                <label for="adults">Adults (13+):</label>
+                <input type="number" id="adults" name="adults" value="1" min="1" required>
+        
+                <label for="children">Children (2-12):</label>
+                <input type="number" id="children" name="children" value="0" min="0">
+        
+                <label for="infants">Infants (Under 2):</label>
+                <input type="number" id="infants" name="infants" value="0" min="0">
+        
+                <button type="submit" class="btn btn-danger w-100">Reserve</button>
+            </form> -->
+            <form class="containeer" action="/listings/<%= listing._id %>/book" method="POST">
+              <div class="total" id="totalPrice">
+                &#8377; <strong id="totalPriceValue"><%= listing.priceAfterTax.toLocaleString("en-IN") %></strong>
+                <span>Total after Tax</span>
+              </div>              
+              <div class="date-selection">
+                  <div class="date">
+                      <label for="checkin">CHECK-IN</label>
+                      <input type="date" id="checkin" name="checkIn" class="dateInput" required>
+                  </div>
+                  <div class="date">
+                      <label for="checkout">CHECKOUT</label>
+                      <input type="date" id="checkout" name="checkOut" class="dateInput" required>
+                  </div>
+              </div>
+              <div class="guests-dropdown">
+                  <button type="button" id="guests-button">1 guest, 2 infants</button>
+                  <div id="guests-menu" class="dropdown-menu">
+                      <div class="guest-type">
+                          <span>Adults</span>
+                          <div class="controls">
+                              <button type="button" class="minus" data-type="adults">-</button>
+                              <span class="count" id="adults-count">1</span>
+                              <button type="button" class="plus" data-type="adults">+</button>
+                          </div>
+                      </div>
+                      <div class="guest-type">
+                          <span>Children</span>
+                          <div class="controls">
+                              <button type="button" class="minus" data-type="children">-</button>
+                              <span class="count" id="children-count">0</span>
+                              <button type="button" class="plus" data-type="children">+</button>
+                          </div>
+                      </div>
+                      <div class="guest-type">
+                          <span>Infants</span>
+                          <div class="controls">
+                              <button type="button" class="minus" data-type="infants">-</button>
+                              <span class="count" id="infants-count">2</span>
+                              <button type="button" class="plus" data-type="infants">+</button>
+                          </div>
+                      </div>
+                      <div class="guest-type">
+                          <span>Pets</span>
+                          <div class="controls">
+                              <button type="button" class="minus" data-type="pets">-</button>
+                              <span class="count" id="pets-count">0</span>
+                              <button type="button" class="plus" data-type="pets">+</button>
+                          </div>
+                      </div>
+                      <p class="note">This place has a maximum of 2 guests, not including infants. Pets aren't allowed.</p>
+                  </div>
+              </div>
+      
+              <p class="text-secondary" style="font-size: 0.78rem;">You'll not be charged yet</p>
+              <button class="btn btn-danger w-100">Reserve</button>
+      
+              <!-- Hidden inputs to capture guest counts -->
+              <input type="hidden" name="adults" id="adults-input" value="1">
+              <input type="hidden" name="children" id="children-input" value="0">
+              <input type="hidden" name="infants" id="infants-input" value="2">
+          </form>
+      
+        <% } %>
+        
         </div>
       </p>
     </div>
@@ -64,7 +144,7 @@
 
   <% if (currUser && currUser._id.equals(listing.owner._id)) { %>
     <div class="row">
-      <div class="col-md-6 mx-auto">
+      <div class="col-md-10 mx-auto">
         <div class="row d-flex align-items-center">
           <div class="col-3">
             <a class="edit_btn" href="/listings/<%= listing._id %>/edit">Edit</a>
@@ -81,7 +161,7 @@
 
       <% if (currUser) { %>
         <div class="row my-3">
-          <div class="col-md-6 mx-auto">
+          <div class="col-md-10 mx-auto">
             <hr>
             <h2>Leave a comment</h2>
             <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation" novalidate>
@@ -116,7 +196,7 @@
         </div>
         <% } else{ %>
           <div class="row">
-            <div class="col-md-6 mx-auto mt-5 text-center mb-0">
+            <div class="col-md-10 mx-auto mt-5 text-center mb-0">
               <p class="mb-0 text-secondary">Please LogIn first to do comments on the posts</p>
             </div>
           </div>
@@ -288,3 +368,5 @@
               </script>
               <script src="/js/map.js"></script>
               <script src="/js/seeMoreLess.js"></script>
+              
+              <script src="/js/addGuests.js"></script>
