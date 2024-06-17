@@ -1,0 +1,26 @@
+.custom-marker {
+    position: relative;
+    width:50px; /* Increased width */
+    height:50px; /* Increased height */
+    background-color: #ff007f; /* Pink color */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.custom-marker::after {
+    content: '';
+    position: absolute;
+    width: 80px; /* Adjusted to match increased size */
+    height: 80px; /* Adjusted to match increased size */
+    background-color: rgba(176, 22, 99, 0.441); /* Lighter pink circle */
+    border-radius: 50%;
+    z-index: -1; /* Behind the main marker */
+}
+
+.custom-marker-icon {
+    width: 20px !important; /* Adjust icon size */
+    height: 20px !important; /* Adjust icon size */
+}

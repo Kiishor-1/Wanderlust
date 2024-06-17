@@ -39,8 +39,19 @@ const map = new mapboxgl.Map({
     zoom: 9 // starting zoom
 });
 
+
+// Create a custom marker element
+const customMarker = document.createElement('div');
+customMarker.className = 'custom-marker';
+// const url = "https://w7.pngwing.com/pngs/848/762/png-transparent-computer-icons-home-house-home-angle-building-rectangle-thumbnail.png";
+customMarker.style.backgroundImage = `url('/img/home3.png')` // path to your custom icon
+customMarker.style.backgroundSize = '100%';
+
+
+
+
 // Add a marker to the map
-const marker = new mapboxgl.Marker({ color: "red" })
+const marker = new mapboxgl.Marker(customMarker)
     .setLngLat(listing.geometry.coordinates)
     .setPopup(
         new mapboxgl.Popup({ offset: 25 }).setHTML(
